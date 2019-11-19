@@ -14,6 +14,15 @@ fn average_with_mass(a: f64, b:f64, amass: f64, bmass: f64) -> f64 {
     average(a * amass, b * bmass) / (amass * bmass)
 }
 
+fn merge_two_bodies(a: Body, b: Body) -> Body {
+    Body {
+        x: average_with_mass(a.x, b.x, a.mass, b.mass),
+        y: average_with_mass(a.y, b.y, a.mass, b.mass),
+        z: average_with_mass(a.z, b.z, a.mass, b.mass),
+        mass: a.mass + b.mass
+    }
+}
+
 fn main() {
 
 }
