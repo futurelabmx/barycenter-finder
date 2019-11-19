@@ -1,3 +1,7 @@
+mod bodies;
+
+use bodies::get_values;
+
 #[derive(Debug, Clone, Copy)]
 pub struct Body {
     x: f64,
@@ -23,6 +27,15 @@ fn merge_two_bodies(a: Body, b: Body) -> Body {
     }
 }
 
-fn main() {
+fn merge_all_bodies_iter(bodies: &[Body]) -> Body {
+    let barycenter = bodies[0];
+    bodies.iter().skip(1).fold(barycenter, |barycenter, body| {
+        merge_two_bodies(barycenter, *body)
+    });
+}
 
+fn main() {
+    let bodies = get_values();
+    let barycenter = merge_all_bodies(&bodies);
+    println!("Barycenter: ({} {} {})\n Mass: {}", barycenter.x, barycenter.y, barycenter.z, barycenter.mass);
 }
